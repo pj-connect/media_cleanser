@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "media_cleanser"
+version = "0.1.0"
+description = "Cleanse montreal gazette readability webpages of clutters"
+authors = ["Philippe Jean"]
+readme = "README.md"
+
+[project.urls]
+"Homepage" = "https://github.com/pj-connect/media_cleanser.git"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+beautifulsoup4 = "^4.12.3"
+lxml = "^5.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+clean-gazette = "media_cleanser.clean_gazette:main"
+
+# A poetic touch
+[tool.verse_of_code]
+inspiration = """
+In lines of code, we find our art,
+A digital canvas, where dreams start.
+With Python's grace, we craft our tale,
+A verse of logic, beyond the veil.
+"""
