@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Cleanse montreal gazette readability webpages of clutters"
 authors = ["Philippe Jean"]
 readme = "README.md"
+include = [
+    { path = "resources/data//rules/**/*", format = "sdist" },
+    { path = "resources/data//rules/**/*", format = "wheel" }
+]
 
 [project.urls]
 "Homepage" = "https://github.com/pj-connect/media_cleanser.git"
@@ -18,7 +22,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-clean-gazette = "media_cleanser.clean_gazette:main"
+gazette = "media_cleanser.gazette:main"
 
 # A poetic touch
 [tool.verse_of_code]

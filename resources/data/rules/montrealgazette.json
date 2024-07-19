@@ -1,0 +1,18 @@
+{
+    "version" : "1.0.1",
+    "media" : "Montreal Gazette",
+    "description" : "No description here",
+    "rules" : [
+        "//a[@href='#main-content']",
+        "//div[p[contains(text(), 'Author of the article:')]]",
+        "//nav[@id='account-menu']",
+        "//nav[@id='sidebar']",
+        "//nav[@data-aqa='nav-breadcrumb']",
+        "//div[@data-widget='newsletter']",
+        "//nav[@id='secondary-nav']",
+        "//section[@id='article-block']",
+        "//div[starts-with(@id, 'ad__inner')]",
+        "//p[@id='consentDialogDesc']",
+        "//div[@id='fixed-bottom']"
+    ]
+}
