@@ -27,6 +27,7 @@ Supported medias:
 
     + montrealgazette.com
     + ottawacitizen.com
+    + financialpost.com
 """
 
 
@@ -53,7 +54,7 @@ def xml_pp(elt):
             print(etree.tostring(e))
 
 
-def clean_gazette(media: str, file_in: io.TextIOWrapper, file_out: str = None):
+def cleanse_gazette(media: str, file_in: io.TextIOWrapper, file_out: str = None):
     """
     Use a json file with xpath rules for elements extractions
     """
@@ -135,7 +136,7 @@ def main():
         help="""Path to a file to be cleanse. iF -o | --out is not specified, the changes a made in place and makes a backup before changes."""
     )
 
-    exlusive_group.add_argument(
+    exlusive_group.add_argument(  # Check if url validation is possible ; @see: https://yarl.aio-libs.org/en/latest/
         '-u', '--url',
         help="""Provide an url instead of a file."""
     )
@@ -162,7 +163,7 @@ def main():
         print(media_list)
         exit(0)
 
-    if args.url is None and args.file is None:
+    if args.url is None and args.file is None:  # obselete
         print("No input specified. Use -f | --file, -u | --url")
         exit(1)
 
@@ -170,14 +171,13 @@ def main():
         print("This feature is not impeented yet")
         exit(1)
 
-    match args.media:
-        case "ottawacitizen.com" | "montrealgazette":  # useless for now ; https://financialpost.com/real-estate/canada-affordability-crisis-build-new-homes
-            if args.url is None and args.file is not None:
-                with open(args.file, 'r+', encoding="utf-8") as file:
-                    if args.out is None:
-                        backup(file)
-                    clean_gazette("montrealgazette", file, args.out)
-        case  _:
+    if args.media.lower() in ["ottawacitizen", "montrealgazette",  "financialpost"]:
+        if args.url is None and args.file is not None:
+            with open(args.file, 'r+', encoding="utf-8") as file:
+                if args.out is None:
+                    backup(file)
+                cleanse_gazette(args.media, file, args.out)
+        else:
             print(f"Media not supported: {args.media}")
 
     gc.collect()
